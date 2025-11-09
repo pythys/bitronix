@@ -13,6 +13,17 @@
 
     <dependencies>
         <dependency>
+          <groupId>org.jboss.spec.javax.rmi</groupId>
+          <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+          <version>1.0.6.Final</version>
+        </dependency>
+        <dependency>
+          <groupId>org.osgi</groupId>
+          <artifactId>osgi.core</artifactId>
+          <version>8.0.0</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <scope>provided</scope>
@@ -55,21 +66,6 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>maven-bundle-plugin</artifactId>
-            <version>2.3.7</version>
-            <type>maven-plugin</type>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>1.0.0</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
     <build>
@@ -78,7 +74,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <compilerArgument>-Xbootclasspath/p:${project.basedir}/src/main/jar/jdbc-4.0-overlay.jar</compilerArgument>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
 
@@ -178,7 +174,7 @@ public final class Version {
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.7</version>
+                <version>6.0.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -198,19 +194,12 @@ public final class Version {
                             javax.swing.event;resolution:=optional,
                             javax.swing.table;resolution:=optional,
                             javax.swing.tree;resolution:=optional
-                        </Import-Package> -->
+                        </Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>${surefire.jvm.settings} -Xbootclasspath/p:${project.basedir}/src/main/jar/jdbc-4.0-overlay.jar</argLine>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
