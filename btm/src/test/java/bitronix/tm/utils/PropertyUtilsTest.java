@@ -126,7 +126,7 @@ public class PropertyUtilsTest extends TestCase {
         assertEquals(13, map.size());
         assertEquals("one", map.get("props.number1"));
         assertEquals("two", map.get("props.number2"));
-        assertEquals(new Integer(10), map.get("anInteger"));
+        assertEquals((int) 10, map.get("anInteger"));
         assertEquals(Boolean.TRUE, map.get("aBoolean"));
         assertEquals(Boolean.FALSE, map.get("anotherBoolean"));
         assertNull(map.get("subDestination"));
@@ -167,12 +167,12 @@ public class PropertyUtilsTest extends TestCase {
 
         assertEquals("this is my string", PropertyUtils.getProperty(destination, "aString"));
         assertEquals(Boolean.TRUE, PropertyUtils.getProperty(destination, "aBoolean"));
-        assertEquals(new Byte((byte) 100), PropertyUtils.getProperty(destination, "aByte"));
-        assertEquals(new Short((short) 20000), PropertyUtils.getProperty(destination, "aShort"));
-        assertEquals(new Integer(300000), PropertyUtils.getProperty(destination, "anInteger"));
-        assertEquals(new Long(4000000L), PropertyUtils.getProperty(destination, "aLong"));
-        assertEquals(new Float(3.14f), PropertyUtils.getProperty(destination, "aFloat"));
-        assertEquals(new Double(0.654987), PropertyUtils.getProperty(destination, "aDouble"));
+        assertEquals((byte) 100, PropertyUtils.getProperty(destination, "aByte"));
+        assertEquals((short) 20000, PropertyUtils.getProperty(destination, "aShort"));
+        assertEquals((int) 300000, PropertyUtils.getProperty(destination, "anInteger"));
+        assertEquals(4000000L, PropertyUtils.getProperty(destination, "aLong"));
+        assertEquals(3.14f, PropertyUtils.getProperty(destination, "aFloat"));
+        assertEquals(0.654987, PropertyUtils.getProperty(destination, "aDouble"));
     }
 
     public static class Destination {
