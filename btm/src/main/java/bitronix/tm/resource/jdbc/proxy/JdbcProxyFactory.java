@@ -77,7 +77,7 @@ public interface JdbcProxyFactory {
                     }
                 }
                 Class<?> proxyFactoryClass = ClassLoaderUtils.loadClass(jdbcProxyFactoryClass);
-                return (JdbcProxyFactory) proxyFactoryClass.newInstance();
+                return (JdbcProxyFactory) proxyFactoryClass.getDeclaredConstructor().newInstance();
             } catch (Exception ex) {
                 throw new BitronixRuntimeException("error initializing JdbcProxyFactory", ex);
             }

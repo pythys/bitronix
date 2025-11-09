@@ -58,7 +58,7 @@ public class TaskScheduler extends Thread implements Service {
         try {
             @SuppressWarnings("unchecked")
             Class<SortedSet<Task>> clazz = ClassLoaderUtils.loadClass("java.util.concurrent.ConcurrentSkipListSet");
-            tasks = clazz.newInstance();
+            tasks = clazz.getDeclaredConstructor().newInstance();
             tasksLock = null;
             if (log.isDebugEnabled()) { log.debug("task scheduler backed by ConcurrentSkipListSet"); }
         } catch (Exception e) {

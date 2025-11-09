@@ -270,22 +270,22 @@ public final class PropertyUtils {
             return Boolean.valueOf((String) value);
         }
         if ((destinationClass == byte.class || destinationClass == Byte.class)  &&  value.getClass() == String.class) {
-            return new Byte((String) value);
+            return Byte.valueOf((String) value);
         }
         if ((destinationClass == short.class || destinationClass == Short.class)  &&  value.getClass() == String.class) {
-            return new Short((String) value);
+            return Short.valueOf((String) value);
         }
         if ((destinationClass == int.class || destinationClass == Integer.class)  &&  value.getClass() == String.class) {
-            return new Integer((String) value);
+            return Integer.valueOf((String) value);
         }
         if ((destinationClass == long.class || destinationClass == Long.class)  &&  value.getClass() == String.class) {
-            return new Long((String) value);
+            return Long.valueOf((String) value);
         }
         if ((destinationClass == float.class || destinationClass == Float.class)  &&  value.getClass() == String.class) {
-            return new Float((String) value);
+            return Float.valueOf((String) value);
         }
         if ((destinationClass == double.class || destinationClass == Double.class)  &&  value.getClass() == String.class) {
-            return new Double((String) value);
+            return Double.valueOf((String) value);
         }
 
         throw new PropertyException("cannot convert values of type '" + value.getClass().getName() + "' into type '" + destinationClass + "'");

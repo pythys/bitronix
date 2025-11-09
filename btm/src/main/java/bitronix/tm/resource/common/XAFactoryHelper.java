@@ -40,7 +40,7 @@ final class XAFactoryHelper {
         if (className == null)
             throw new IllegalArgumentException("className cannot be null");
         Class<?> xaFactoryClass = ClassLoaderUtils.loadClass(className);
-        Object xaFactory = xaFactoryClass.newInstance();
+        Object xaFactory = xaFactoryClass.getDeclaredConstructor().newInstance();
 
         for (Map.Entry<Object, Object> entry : bean.getDriverProperties().entrySet()) {
             String name = (String) entry.getKey();
