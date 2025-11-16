@@ -48,6 +48,7 @@ the modern era.
   - It depended on CGLIB and fails on Java 17+.
   - Modern Spring usage requires only a few lines of configuration without this
     module.
+- **Removed all obsolete lifecycle modules for jetty and tomcat**
 - **Removed the deprecated maven-release-plugin.**
 - **Removed GitHub CI workflow** that targeted outdated Java toolchains and
   Maven versions.
