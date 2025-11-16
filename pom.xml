@@ -35,6 +35,7 @@
         <connection>scm:git:git@github.com/moqui/bitronix.git</connection>
         <developerConnection>scm:git:git@github.com:moqui/bitronix.git</developerConnection>
     </scm>
+
     <developers>
         <developer>
             <id>taher</id>
