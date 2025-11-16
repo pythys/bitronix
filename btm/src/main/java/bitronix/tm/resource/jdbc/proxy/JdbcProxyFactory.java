@@ -62,6 +62,7 @@ public interface JdbcProxyFactory {
             try {
                 String jdbcProxyFactoryClass = TransactionManagerServices.getConfiguration().getJdbcProxyFactoryClass();
                 if ("auto".equals(jdbcProxyFactoryClass)) {
+                    /* TODO get rid of javassist and cglib from the project completely and get rid of "auto" config
                     try {
                         ClassLoaderUtils.loadClass("javassist.CtClass");
                         jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavassistProxyFactory";
@@ -75,6 +76,8 @@ public interface JdbcProxyFactory {
                             jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavaProxyFactory";
                         }
                     }
+                    */
+                    jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavaProxyFactory";
                 }
                 Class<?> proxyFactoryClass = ClassLoaderUtils.loadClass(jdbcProxyFactoryClass);
                 return (JdbcProxyFactory) proxyFactoryClass.getDeclaredConstructor().newInstance();

@@ -40,9 +40,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.anyObject;
-import static org.mockito.Mockito.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -210,8 +210,8 @@ public class MockitoXADataSource implements XADataSource {
         // Handle Connection.prepareStatement()
         when(mockConnection.prepareStatement(anyString())).thenAnswer(mockPreparedStatement());
         when(mockConnection.prepareStatement(anyString(), anyInt())).thenAnswer(mockPreparedStatement());
-        when(mockConnection.prepareStatement(anyString(), (int[]) anyObject())).thenAnswer(mockPreparedStatement());
-        when(mockConnection.prepareStatement(anyString(), (String[]) anyObject())).thenAnswer(mockPreparedStatement());
+        when(mockConnection.prepareStatement(anyString(), (int[]) any())).thenAnswer(mockPreparedStatement());
+        when(mockConnection.prepareStatement(anyString(), (String[]) any())).thenAnswer(mockPreparedStatement());
         when(mockConnection.prepareStatement(anyString(), anyInt(), anyInt())).thenAnswer(mockPreparedStatement());
         when(mockConnection.prepareStatement(anyString(), anyInt(), anyInt(), anyInt())).thenAnswer(mockPreparedStatement());
 

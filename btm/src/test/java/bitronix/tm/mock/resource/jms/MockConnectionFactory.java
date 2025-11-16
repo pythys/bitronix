@@ -25,9 +25,9 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +42,7 @@ public class MockConnectionFactory implements ConnectionFactory {
 			public Session answer(InvocationOnMock invocation) throws Throwable {
 				Session session = mock(Session.class);
 				MessageProducer producer = mock(MessageProducer.class);
-				when(session.createProducer((Destination) anyObject())).thenReturn(producer);
+				when(session.createProducer((Destination) any())).thenReturn(producer);
 				return session;
 			}
     	};

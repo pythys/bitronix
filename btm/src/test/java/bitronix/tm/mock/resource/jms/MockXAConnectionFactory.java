@@ -30,10 +30,10 @@ import javax.jms.XAConnection;
 import javax.jms.XAConnectionFactory;
 import javax.jms.XASession;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -57,11 +57,11 @@ public class MockXAConnectionFactory implements XAConnectionFactory {
     		public XASession answer(InvocationOnMock invocation)throws Throwable {
     			XASession mockXASession = mock(XASession.class);
     			MessageProducer messageProducer = mock(MessageProducer.class);
-    	    	when(mockXASession.createProducer((Destination) anyObject())).thenReturn(messageProducer);
+                when(mockXASession.createProducer((Destination) any())).thenReturn(messageProducer);
     	    	MessageConsumer messageConsumer = mock(MessageConsumer.class);
-    	    	when(mockXASession.createConsumer((Destination) anyObject())).thenReturn(messageConsumer);
-    	    	when(mockXASession.createConsumer((Destination) anyObject(), anyString())).thenReturn(messageConsumer);
-    	    	when(mockXASession.createConsumer((Destination) anyObject(), anyString(), anyBoolean())).thenReturn(messageConsumer);
+    	    	when(mockXASession.createConsumer((Destination) any())).thenReturn(messageConsumer);
+    	    	when(mockXASession.createConsumer((Destination) any(), anyString())).thenReturn(messageConsumer);
+    	    	when(mockXASession.createConsumer((Destination) any(), anyString(), anyBoolean())).thenReturn(messageConsumer);
     	    	Queue queue = mock(Queue.class);
     	    	when(mockXASession.createQueue(anyString())).thenReturn(queue);
     	    	Topic topic = mock(Topic.class);
@@ -72,7 +72,7 @@ public class MockXAConnectionFactory implements XAConnectionFactory {
     				public Session answer(InvocationOnMock invocation) throws Throwable {
     					Session session = mock(Session.class);
     					MessageProducer producer = mock(MessageProducer.class);
-    					when(session.createProducer((Destination) anyObject())).thenReturn(producer);
+    					when(session.createProducer((Destination) any())).thenReturn(producer);
     					return session;
     				}
     	    	};
