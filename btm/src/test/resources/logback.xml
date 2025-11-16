@@ -1,44 +1,40 @@
 <configuration>
-
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>OFF</level>
-        </filter>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d [%t] {%X{btm-gtrid}} [%p,%c{1}] %m%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%level] %logger{20} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>target/tests.log</file>
+        <append>true</append>
         <encoder>
-            <pattern>%d [%-25.25t] {%-50X{btm-gtrid}} [%-5p] %m%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-25thread] {%-40mdc{btm-gtrid}} [%-5level] %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="sift" class="ch.qos.logback.classic.sift.SiftingAppender">
-        <discriminator>
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">
             <key>btm-gtrid</key>
-            <defaultValue>N/A</defaultValue>
+            <defaultValue>N-A</defaultValue>
         </discriminator>
         <sift>
-            <appender name="file-${btm-gtrid}" class="ch.qos.logback.core.FileAppender">
-                <file>target/tests-${btm-gtrid}.log</file>
-                <append>false</append>
+            <appender name="FILE-%btm-gtrid" class="ch.qos.logback.core.FileAppender">
+                <file>target/tests-%btm-gtrid.log</file>
                 <encoder>
-                    <pattern>%d [%-25.25t] [%-5p] %m%n</pattern>
+                    <pattern>%d{HH:mm:ss.SSS} [%-20thread] [%-5level] %msg%n</pattern>
                 </encoder>
             </appender>
         </sift>
     </appender>
 
-
-    <logger name="bitronix.tm" level="INFO">
-        <appender-ref ref="file"/>
+    <logger name="bitronix.tm" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="SIFT"/>
     </logger>
 
     <root level="INFO">
-        <appender-ref ref="console"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>
