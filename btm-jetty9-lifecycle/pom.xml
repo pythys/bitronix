@@ -11,10 +11,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.codehaus.btm</groupId>
+            <groupId>org.moqui</groupId>
             <artifactId>btm</artifactId>
+            <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-plus</artifactId>
