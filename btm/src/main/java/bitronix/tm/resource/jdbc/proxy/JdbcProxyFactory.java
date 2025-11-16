@@ -62,21 +62,7 @@ public interface JdbcProxyFactory {
             try {
                 String jdbcProxyFactoryClass = TransactionManagerServices.getConfiguration().getJdbcProxyFactoryClass();
                 if ("auto".equals(jdbcProxyFactoryClass)) {
-                    /* TODO get rid of javassist and cglib from the project completely and get rid of "auto" config
-                    try {
-                        ClassLoaderUtils.loadClass("javassist.CtClass");
-                        jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavassistProxyFactory";
-                    }
-                    catch (ClassNotFoundException cnfe) {
-                        try {
-                            ClassLoaderUtils.loadClass("net.sf.cglib.proxy.Enhancer");
-                            jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcCglibProxyFactory";
-                        }
-                        catch (ClassNotFoundException cnfe2) {
-                            jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavaProxyFactory";
-                        }
-                    }
-                    */
+                    /* TODO get rid of "auto" config, no longer necessary */
                     jdbcProxyFactoryClass = "bitronix.tm.resource.jdbc.proxy.JdbcJavaProxyFactory";
                 }
                 Class<?> proxyFactoryClass = ClassLoaderUtils.loadClass(jdbcProxyFactoryClass);
