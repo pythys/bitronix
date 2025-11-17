@@ -41,6 +41,7 @@ the modern era.
 
 - **Removed Javassist and all related proxy implementation code.**
 - **Removed CGLIB and all related proxy implementation code.**
+- **Removed CORBA rmi obsolete implementation**
 - The `"auto"` proxy-factory detection logic was simplified; Java Proxy is now
   the only mechanism.
 - **Removed the entire `btm-spring` module**, because:

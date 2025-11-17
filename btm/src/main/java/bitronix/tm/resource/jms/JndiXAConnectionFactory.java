@@ -21,7 +21,6 @@ import javax.jms.XAConnectionFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.rmi.PortableRemoteObject;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -40,7 +39,6 @@ public class JndiXAConnectionFactory implements XAConnectionFactory {
     private volatile String securityPrincipal;
     private volatile String securityCredentials;
     private volatile Properties extraJndiProperties = new Properties();
-    private volatile boolean narrowJndiObject = false;
     private volatile XAConnectionFactory wrappedFactory;
 
 
@@ -163,24 +161,6 @@ public class JndiXAConnectionFactory implements XAConnectionFactory {
         this.extraJndiProperties = extraJndiProperties;
     }
 
-    /**
-     * Should {@link PortableRemoteObject#narrow(Object, Class)} be applied on the object looked up from
-     * JNDI before trying to cast it to {@link XAConnectionFactory} ?
-     * @return true if the object should be narrowed, false otherwise.
-     */
-    public boolean isNarrowJndiObject() {
-        return narrowJndiObject;
-    }
-
-    /**
-     * Set if {@link PortableRemoteObject#narrow(Object, Class)} should be applied on the object looked up from
-     * JNDI before trying to cast it to {@link XAConnectionFactory} ?
-     * @param narrowJndiObject true if the object should be narrowed, false otherwise.
-     */
-    public void setNarrowJndiObject(boolean narrowJndiObject) {
-        this.narrowJndiObject = narrowJndiObject;
-    }
-
     protected void init() throws NamingException {
         if (wrappedFactory != null)
             return;
@@ -207,12 +187,7 @@ public class JndiXAConnectionFactory implements XAConnectionFactory {
 
         try {
             Object lookedUpObject = ctx.lookup(name);
-            if (narrowJndiObject) {
-                wrappedFactory = (XAConnectionFactory) PortableRemoteObject.narrow(lookedUpObject, XAConnectionFactory.class);
-            }
-            else {
-                wrappedFactory = (XAConnectionFactory) lookedUpObject;
-            }
+            wrappedFactory = (XAConnectionFactory) lookedUpObject;
         }
         finally {
             ctx.close();
