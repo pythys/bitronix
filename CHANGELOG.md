@@ -93,6 +93,7 @@ namespace to the `jakarta.*` namespace.
   - Modern Spring usage requires only a few lines of configuration without this
     module.
 - **Removed all obsolete lifecycle modules for jetty and tomcat**
+- **Removed all bitronix/tm/resource/ehcache files**
 - **Removed the deprecated maven-release-plugin.**
 - **Removed GitHub CI workflow** that targeted outdated Java toolchains and
   Maven versions.
