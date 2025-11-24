@@ -53,7 +53,7 @@ applications to migrate from `javax.jms` to `jakarta.jms`.
 
 2. Update imports from `javax.jms.*` to `jakarta.jms.*`
 
-2. Update Dependencies. For example:
+3. Update Dependencies. For example:
 
 ```patch
 -<dependency>
