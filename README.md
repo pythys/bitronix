@@ -33,9 +33,9 @@ check linting issues:
 fix linting issues:
 `./mvnw spotless:apply`
 
-## Original Authors
+## Credits
 
 BTM was created and maintained by the Bitronix team, namely:
 
-- [Ludovic Orban](https://x.com/bitronix)
-- [Brett Wooldridge](https://x.com/BrettWooldridge). 
+- [Ludovic Orban](https://x.com/bitronix) (Original Author)
+- [Brett Wooldridge](https://x.com/BrettWooldridge) (Former Maintainer)
