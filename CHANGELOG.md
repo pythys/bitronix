@@ -14,8 +14,8 @@ After more than a decade of inactivity, **Bitronix Transaction Manager** has
 been revived and modernized. This release focuses heavily on simplifying the
 codebase, removing obsolete bytecode manipulation layers, adopting Java 17+,
 improving test stability, and bringing the build system and documentation into
-the modern era. It also switched from JTA 1.1 to Jakarta JTA 2.0 which is a
-**breaking change**.
+the modern era. It also switched from JTA 1.1 to Jakarta JTA 2.0 and JMS 1.1 to
+Jakarta JMS 3.1 both of which are **breaking changes**.
 
 ### Jakarta Migration
 
