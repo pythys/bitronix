@@ -15,12 +15,15 @@ To build this project, you must have JDK17+ installed on your machine.
 
 `./mvnw clean install`
 
-## Javadocs
+## Documentation
 
-`./mvnw javadocs:javadocs`
+Javadocs:
+  - generate: `./mvnw javadocs:javadocs`
+  - view: `btm/target/reports/apidocs/index.html`
 
-Find the html at `btm/target/reports/apidocs/index.html` as well
-as the javadocs jar
+Asciidocs:
+  - generate: `./mvnw generate-resources`
+  - view: `btm-docs/target/generated-docs/index.html`
 
 ## Linting
 
