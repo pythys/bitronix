@@ -139,9 +139,6 @@ applications to migrate from `javax.jms` to `jakarta.jms`.
   It previously contained Ant-based distribution scripts and dozens of
   hand-maintained release-notes text files.  
   These notes have now been consolidated into this unified `CHANGELOG.md`.
-- No functionality has been lost—the module only provided packaging artifacts
-  for tools and processes that are obsolete today (Ant, manual distribution
-  zips, bundled licenses, etc.).
 - All historical release notes from 2006–2014 were preserved and merged here to
   maintain project history in a modern, accessible format.
 
