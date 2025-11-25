@@ -57,11 +57,17 @@ public final class PropertyUtils {
                 // try to instantiate the object & set it in place
                 Class<?> propertyType = getPropertyType(target, name);
                 try {
-                    result = propertyType.newInstance();
-                } catch (InstantiationException ex) {
-                    throw new PropertyException("cannot set property '" + propertyName + "' - '" + name + "' is null and cannot be auto-filled", ex);
-                } catch (IllegalAccessException ex) {
-                    throw new PropertyException("cannot set property '" + propertyName + "' - '" + name + "' is null and cannot be auto-filled", ex);
+                    result = propertyType.getDeclaredConstructor().newInstance();
+                } catch (InstantiationException |
+                         IllegalAccessException |
+                         InvocationTargetException |
+                         NoSuchMethodException ex) {
+                    String errMsg = "cannot set property '" +
+                            propertyName +
+                            "' - '" +
+                            name +
+                            "' is null and cannot be auto-filled";
+                    throw new PropertyException(errMsg, ex);
                 }
                 callSetter(currentTarget, name, result);
             }
