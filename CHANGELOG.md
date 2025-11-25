@@ -101,6 +101,7 @@ applications to migrate from `javax.jms` to `jakarta.jms`.
   API usage.
 - Disabled Javadoc doclint for compatibility with older comments.
 - Replaced Mockito deprecated APIs with modern `ArgumentMatchers` equivalents.
+- Initial work done on documentation to get it up to date with codebase changes.
 
 ### Removed
 
