@@ -214,7 +214,8 @@ public class TransactionManagerServices {
             analyzer = new DefaultExceptionAnalyzer();
             if (exceptionAnalyzerName != null) {
                 try {
-                    analyzer = (ExceptionAnalyzer) ClassLoaderUtils.loadClass(exceptionAnalyzerName).newInstance();
+                    Class<?> clazz = ClassLoaderUtils.loadClass(exceptionAnalyzerName);
+                    analyzer = (ExceptionAnalyzer) clazz.getDeclaredConstructor().newInstance();
                 } catch (Exception ex) {
                     log.warn("failed to initialize custom exception analyzer, using default one instead", ex);
                 }
