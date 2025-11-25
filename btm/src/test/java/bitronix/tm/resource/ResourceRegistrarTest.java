@@ -23,7 +23,6 @@ import bitronix.tm.resource.common.XAResourceHolder;
 import bitronix.tm.resource.common.XAResourceProducer;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -47,11 +46,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests the fundamental functionality of the newly implemented ResourceRegistrar.
+ * Tests the fundamental functionality of the ResourceRegistrar.
  *
  * @author Juergen_Kellerer, 2011-08-24
  */
-@Ignore
 public class ResourceRegistrarTest {
 
     ExecutorService executorService;
