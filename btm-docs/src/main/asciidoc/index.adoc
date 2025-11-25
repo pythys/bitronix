@@ -1,5 +1,14 @@
 = Bitronix Transaction Manager
 
+[IMPORTANT]
+====
+After more than a decade of inactivity, **Bitronix Transaction Manager** has
+been actively revived and modernized. Significant updates have been introduced
+to the codebase, but the documentation has not yet caught up. Portions of this
+guide may be outdated or incomplete. A comprehensive documentation refresh is
+currently in progress.
+====
+
 The Bitronix Transaction Manager (BTM) is a simple but complete implementation
 of the Jakarta JTA 2.0 API. It is a fully working XA transaction manager that
 provides all services required by the JTA API while trying to keep the code as
