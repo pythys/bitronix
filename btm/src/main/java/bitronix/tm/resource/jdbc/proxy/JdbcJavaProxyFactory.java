@@ -63,7 +63,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public Connection getProxyConnection(JdbcPooledConnection jdbcPooledConnection, Connection connection) {
         try {
             ConnectionJavaProxy jdbcConnectionProxy = new ConnectionJavaProxy(jdbcPooledConnection, connection);
-            return proxyConnectionFactory.getConstructor().newInstance(jdbcConnectionProxy);
+            return proxyConnectionFactory.newInstance(jdbcConnectionProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -74,7 +74,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public Statement getProxyStatement(JdbcPooledConnection jdbcPooledConnection, Statement statement) {
         try {
             StatementJavaProxy jdbcStatementProxy = new StatementJavaProxy(jdbcPooledConnection, statement);
-            return proxyStatementFactory.getConstructor().newInstance(jdbcStatementProxy);
+            return proxyStatementFactory.newInstance(jdbcStatementProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -85,7 +85,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public CallableStatement getProxyCallableStatement(JdbcPooledConnection jdbcPooledConnection, CallableStatement statement) {
         try {
             CallableStatementJavaProxy jdbcStatementProxy = new CallableStatementJavaProxy(jdbcPooledConnection, statement);
-            return proxyCallableStatementFactory.getConstructor().newInstance(jdbcStatementProxy);
+            return proxyCallableStatementFactory.newInstance(jdbcStatementProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -96,7 +96,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public PreparedStatement getProxyPreparedStatement(JdbcPooledConnection jdbcPooledConnection, PreparedStatement statement, CacheKey cacheKey) {
         try {
             PreparedStatementJavaProxy jdbcStatementProxy = new PreparedStatementJavaProxy(jdbcPooledConnection, statement, cacheKey);
-            return proxyPreparedStatementFactory.getConstructor().newInstance(jdbcStatementProxy);
+            return proxyPreparedStatementFactory.newInstance(jdbcStatementProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +107,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public ResultSet getProxyResultSet(Statement statement, ResultSet resultSet) {
         try {
             ResultSetJavaProxy jdbcResultSetProxy = new ResultSetJavaProxy(statement, resultSet);
-            return proxyResultSetFactory.getConstructor().newInstance(jdbcResultSetProxy);
+            return proxyResultSetFactory.newInstance(jdbcResultSetProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -118,7 +118,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public XAConnection getProxyXaConnection(Connection connection) {
         try {
             LrcXAConnectionJavaProxy jdbcLrcXaConnectionProxy = new LrcXAConnectionJavaProxy(connection);
-            return proxyXAConnectionFactory.getConstructor().newInstance(jdbcLrcXaConnectionProxy);
+            return proxyXAConnectionFactory.newInstance(jdbcLrcXaConnectionProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -129,7 +129,7 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     public Connection getProxyConnection(LrcXAResource xaResource, Connection connection) {
         try {
             LrcConnectionJavaProxy lrcConnectionJavaProxy = new LrcConnectionJavaProxy(xaResource, connection);
-            return proxyConnectionFactory.getConstructor().newInstance(lrcConnectionJavaProxy);
+            return proxyConnectionFactory.newInstance(lrcConnectionJavaProxy);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -140,83 +140,51 @@ public class JdbcJavaProxyFactory implements JdbcProxyFactory {
     // ---------------------------------------------------------------
 
     private ProxyFactory<Connection> createProxyConnectionFactory() {
-
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(Connection.class);
         interfaces.add(PooledConnectionProxy.class);
-
         return new ProxyFactory<Connection>(interfaces.toArray(new Class<?>[0]));
     }
 
     private ProxyFactory<Statement> createProxyStatementFactory() {
-
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(Statement.class);
-
         return new ProxyFactory<Statement>(interfaces.toArray(new Class<?>[0]));
     }
 
     private ProxyFactory<PreparedStatement> createProxyPreparedStatementFactory() {
-
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(PreparedStatement.class);
-
         return new ProxyFactory<PreparedStatement>(interfaces.toArray(new Class<?>[0]));
     }
 
     private ProxyFactory<ResultSet> createProxyResultSetFactory() {
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(ResultSet.class);
-
         return new ProxyFactory<ResultSet>(interfaces.toArray(new Class<?>[0]));
     }
 
     private ProxyFactory<CallableStatement> createProxyCallableStatementFactory() {
-
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(CallableStatement.class);
-
         return new ProxyFactory<CallableStatement>(interfaces.toArray(new Class<?>[0]));
     }
 
     private ProxyFactory<XAConnection> createProxyXAConnectionFactory() {
-
         Set<Class<?>> interfaces = ClassLoaderUtils.getAllInterfaces(Connection.class);
         interfaces.add(XAConnection.class);
-
         return new ProxyFactory<XAConnection>(interfaces.toArray(new Class<?>[0]));
     }
 
     public static class ProxyFactory<T> {
         private final Class<?>[] interfaces;
-        private Reference<Constructor<T>> ctorRef;
-
         public ProxyFactory(Class<?>[] interfaces) {
             this.interfaces = interfaces;
         }
-
         public T newInstance(InvocationHandler handler) {
-            if (handler == null)
+            if (handler == null) {
                 throw new NullPointerException();
-
-            try {
-                return getConstructor().newInstance(new Object[] { handler });
-            } catch (Exception e) {
-                throw new InternalError(e.toString());
             }
-        }
-
-        @SuppressWarnings("unchecked")
-        private synchronized Constructor<T> getConstructor() {
-            Constructor<T> ctor = ctorRef == null ? null : ctorRef.get();
-
-            if (ctor == null) {
-                try {
-                    ctor = (Constructor<T>) Proxy.getProxyClass(getClass().getClassLoader(), interfaces)
-                            .getConstructor(new Class[] { InvocationHandler.class });
-                } catch (NoSuchMethodException e) {
-                    throw new InternalError(e.toString());
-                }
-
-                ctorRef = new SoftReference<Constructor<T>>(ctor);
-            }
-
-            return ctor;
+            return (T) Proxy.newProxyInstance(
+                getClass().getClassLoader(),
+                interfaces,
+                handler
+            );
         }
     }
 }
