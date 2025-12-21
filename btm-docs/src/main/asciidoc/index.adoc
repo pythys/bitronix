@@ -14,8 +14,6 @@ of the Jakarta JTA 2.0 API. It is a fully working XA transaction manager that
 provides all services required by the JTA API while trying to keep the code as
 simple as possible for easier understanding of the XA semantics.
      
-**THE PRIMARY GOAL OF THE BTM PROJECT IS TO MAKE JTA A COMMODITY**
-
 This is BTM's strongest point compared to its competitors: it is trivial to
 configure and when something goes wrong it is much easier to figure out what to
 do thanks to the great care placed in useful error reporting and logging.
@@ -85,14 +83,6 @@ link:CryptResourcePassword2x.html[Password encryption]
 link:Hibernate2x.html[Hibernate]
 
 link:IBatis2x.html[iBATIS Data Mapper]
-
-=== Container integration
-
-link:Jetty2x.html[Jetty]
-
-link:TomcatWithBtm2x.html[Tomcat]
-
-link:SpringFramework2x.html[Spring Framework]
 
 === JNDI
 

@@ -4,7 +4,7 @@
 **TODO** This page needs updating, because BTM no longer releases to codehaus!
 ****
 
-* write release notes, save them in btm-dist/src/main/dist/release-notes
+* write release notes, save them in CHANGELOG.md
 * build the release with mvn release:prepare -Pdist, mvn release:perform -Pdist (this deploys artifacts and tags the build in GIT)
 * When being asked for a tag, replace it with btm-X.Y.Z instead of btm-parent-X.Y.Z
 * release the staged artifacts from codehaus's Nexus (https://nexus.codehaus.org/)

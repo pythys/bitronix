@@ -10,7 +10,7 @@
 [[prerequisites]]
 == Prerequisites
 
-You need to have these softwares installed to be able to build BTM:
+You need to have these softwares installed to be able to build bitronix:
 
 * GIT
 * JDK 17+
@@ -21,13 +21,13 @@ You need to have these softwares installed to be able to build BTM:
 The project uses GIT as it's source code control system.
 The source can be checked out anonymously using:
 
-    git clone https://github.com/pythys/bitronix
+    git clone https://github.com/moqui/bitronix
 
 [[building]]
 == Building
 
-The project uses Apache Maven 2 as it's build tool.
-Go to the top level directory of the project and type:
+The project uses Apache Maven 2 as its build tool. Go to the top level directory
+of the project and type:
 
     mvn install
 
